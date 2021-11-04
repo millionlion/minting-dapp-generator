@@ -7,6 +7,7 @@
     "ID": 137
   },
   "NFT_NAME": "Million Lion",
+  "LIGHTPAPER": "./config/files/MillionLion_Lightpaper.pdf",
   "SYMBOL": "ML",
   "MAX_SUPPLY": 1000,
   "WEI_COST": 100000000000000000000,

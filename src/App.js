@@ -227,10 +227,7 @@ function App() {
             </StyledLink>
           </s.TextDescription>
         </s.Container>
-
-        
-          
-          <s.TextTitle
+        <s.TextTitle
           style={{
             textAlign: "center",
             fontSize: 24,
@@ -345,16 +342,27 @@ function App() {
           <s.SpacerLarge />
           <StyledPreview alt={"logo"} src={"/config/images/preview.png"} />
         </ResponsiveWrapper>
-          <s.SpacerMedium />
-          <s.TextDescription
+        <StyledLink
+          href={CONFIG.LIGHTPAPER}
+          style={{
+            textAlign: "center",
+            color: "var(--primary-text)",
+          }}
+          download
+          >
+            Lightpaper
+          </StyledLink>
+        <s.SpacerLarge />
+        <s.SpacerLarge />
+        <s.TextDescription
           style={{
             textAlign: "left",
             color: "var(--dark-gray)",
             paddingLeft: "24px"
           }}
-          >
-            © 2021 Million Lion - ml@millionlion.org - Inspired by HashLips
-          </s.TextDescription>
+        >
+          © 2021 Million Lion - ml@millionlion.org - Inspired by HashLips
+        </s.TextDescription>
       </s.Container>
     </s.Screen>
   );
