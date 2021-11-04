@@ -1,0 +1,12 @@
+
+<svg width="672px" height="96px" viewBox="0 0 672 96" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="Summary" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-2">
+            <circle id="Oval" fill="#FFBF00" cx="48" cy="48" r="48"></circle>
+            <circle id="Oval" fill="#A600FF" cx="192" cy="48" r="48"></circle>
+            <circle id="Oval" fill="#FF0000" cx="336" cy="48" r="48"></circle>
+            <circle id="Oval" fill="#0062FF" cx="480" cy="48" r="48"></circle>
+            <circle id="Oval" fill="#00FF77" cx="624" cy="48" r="48"></circle>
+        </g>
+    </g>
+</svg>

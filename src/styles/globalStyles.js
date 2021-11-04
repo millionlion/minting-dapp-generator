@@ -46,13 +46,13 @@ export const Container = styled.div`
   background-color: ${({ test }) => (test ? "pink" : "none")};
   width: 100%;
   background-image: ${({ image }) => (image ? `url(${image})` : "none")};
-  background-size: cover;
+  background-size: 512px 512px;
   background-position: center;
 `;
 
 export const TextTitle = styled.p`
   color: var(--primary-text);
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 500;
   line-height: 1.6;
 `;
@@ -65,7 +65,7 @@ export const TextSubTitle = styled.p`
 
 export const TextDescription = styled.p`
   color: var(--primary-text);
-  font-size: 16px;
+  font-size: 14px;
   line-height: 1.6;
 `;
 

@@ -1,0 +1,26 @@
+<svg width="672px" height="150px" viewBox="0 0 672 150" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="Summary" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-2">
+            <circle id="Oval" fill="#FFBF00" cx="48" cy="48" r="48"></circle>
+            <circle id="Oval" fill="#A600FF" cx="192" cy="48" r="48"></circle>
+            <circle id="Oval" fill="#FF0000" cx="336" cy="48" r="48"></circle>
+            <circle id="Oval" fill="#0062FF" cx="480" cy="48" r="48"></circle>
+            <circle id="Oval" fill="#00FF77" cx="624" cy="48" r="48"></circle>
+            <text id="DJNG" font-family="ArialMT, Arial" font-size="20" font-weight="normal" fill="#FFFFFF">
+                <tspan x="21" y="146">DJNG</tspan>
+            </text>
+            <text id="PLP-FCTN" font-family="ArialMT, Arial" font-size="20" font-weight="normal" fill="#FFFFFF">
+                <tspan x="144" y="146">PLP FCTN</tspan>
+            </text>
+            <text id="TRMNTR" font-family="ArialMT, Arial" font-size="20" font-weight="normal" fill="#FFFFFF">
+                <tspan x="294" y="146">TRMNTR</tspan>
+            </text>
+            <text id="AVTR" font-family="ArialMT, Arial" font-size="20" font-weight="normal" fill="#FFFFFF">
+                <tspan x="454" y="146">AVTR</tspan>
+            </text>
+            <text id="MTRX" font-family="ArialMT, Arial" font-size="20" font-weight="normal" fill="#FFFFFF">
+                <tspan x="595" y="146">MTRX</tspan>
+            </text>
+        </g>
+    </g>
+</svg>
