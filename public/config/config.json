@@ -15,5 +15,6 @@
   "GAS_LIMIT": 285000,
   "MARKETPLACE": "Opeansea",
   "MARKETPLACE_LINK": "https://opensea.io/collection/millionlion",
-  "SHOW_BACKGROUND": true
+  "SHOW_BACKGROUND": true,
+  "IPFS_GATEWAY": "https://millionlion.mypinata.cloud/"
 }

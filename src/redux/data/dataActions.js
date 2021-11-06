@@ -25,18 +25,35 @@ export const fetchData = () => {
   return async (dispatch) => {
     dispatch(fetchDataRequest());
     try {
+      let imageURIs = []
       let totalSupply = await store
         .getState()
         .blockchain.smartContract.methods.totalSupply()
         .call();
-      // let cost = await store
-      //   .getState()
-      //   .blockchain.smartContract.methods.cost()
-      //   .call();
+      let maxSupply = await store
+        .getState()
+        .blockchain.smartContract.methods.maxSupply()
+        .call();
+
+      for (let i = 1; i <= totalSupply; i++) {
+        let tokenURI = await store
+          .getState()
+          .blockchain.smartContract.methods.tokenURI(`${i}`)
+          .call();
+
+        let trimmedTonekURI = tokenURI.replace("://", "/");
+        let res = await fetch('https://millionlion.mypinata.cloud/' + trimmedTonekURI);
+        let metadata = await res.json();
+        let trimmedImagedURI = metadata.image.replace("://", "/");
+
+        imageURIs.push('https://millionlion.mypinata.cloud/' + trimmedImagedURI);
+      }
 
       dispatch(
         fetchDataSuccess({
           totalSupply,
+          imageURIs,
+          maxSupply
           // cost,
         })
       );

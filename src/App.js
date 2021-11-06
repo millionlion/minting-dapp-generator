@@ -236,9 +236,21 @@ function App() {
         >
           Unveiling - Dec, 2021
         </s.TextTitle>
-
+        <s.SpacerSmall />
         <ResponsiveWrapper>
-          <StyledPreview alt={"preview"} src={"/config/images/preview.png"} />
+          <s.Container
+            jc={"center"}
+            ai={"center"}
+            style={{
+              backgroundColor: "var(--accent)",
+              borderRadius: 24,
+              padding: 24,
+            }}
+          >
+            <div style={{ height: "204px", width: "204px" }}>
+              <StyledPreview alt={"preview"} src={"/config/images/preview.png"} style={{ borderRadius: 24 }} />
+            </div>
+          </s.Container>
           <s.SpacerLarge />
           <s.Container
             jc={"center"}
@@ -249,99 +261,151 @@ function App() {
               borderRadius: 24,
             }}
           >
-            {Number(data.totalSupply) >= CONFIG.MAX_SUPPLY ? (
-              <>
-                <s.TextTitle
-                  style={{ textAlign: "center", color: "var(--accent-text)" }}
-                >
-                  The sale has ended.
-                </s.TextTitle>
-                <s.TextDescription
-                  style={{ textAlign: "center", color: "var(--accent-text)" }}
-                >
-                  You can still find {CONFIG.NFT_NAME} on
-                </s.TextDescription>
-                <s.SpacerSmall />
-                <StyledLink target={"_blank"} href={CONFIG.MARKETPLACE_LINK}>
-                  {CONFIG.MARKETPLACE}
-                </StyledLink>
-              </>
-            ) : (
-              <>
-                <s.TextTitle
-                  style={{ textAlign: "center", color: "var(--accent-text)" }}
-                >
-                  1 {CONFIG.NFT_NAME}
-                </s.TextTitle>
-                <s.TextTitle
-                  style={{ textAlign: "center", color: "var(--accent-text)" }}
-                >
-                  =
-                </s.TextTitle>
-                <s.TextTitle
-                  style={{ textAlign: "center", color: "var(--accent-text)" }}
-                >
-                  {CONFIG.DISPLAY_COST}{" "}
-                  {CONFIG.NETWORK.SYMBOL}.
-                </s.TextTitle>
-                <s.SpacerLarge />
-                {blockchain.account === "" ||
-                  blockchain.smartContract === null ? (
-                  <s.Container ai={"center"} jc={"center"} style={{ width: 216 }}>
-                    <StyledButton
-                      onClick={(e) => {
-                        e.preventDefault();
-                        dispatch(connect());
-                        getData();
-                      }}
+            <div style={{ height: "204px", width: "204px", textAlign: "center" }}>
+              <img src={"/config/images/price.svg"} />
+              {Number(data.totalSupply) >= CONFIG.MAX_SUPPLY ? (
+                <>
+                  <s.TextTitle
+                    style={{ textAlign: "center", color: "var(--accent-text)" }}
+                  >
+                    The sale has ended.
+                  </s.TextTitle>
+                  <s.TextDescription
+                    style={{ textAlign: "center", color: "var(--accent-text)" }}
+                  >
+                    You can still find {CONFIG.NFT_NAME} on
+                  </s.TextDescription>
+                  <s.SpacerSmall />
+                  <StyledLink target={"_blank"} href={CONFIG.MARKETPLACE_LINK}>
+                    {CONFIG.MARKETPLACE}
+                  </StyledLink>
+                </>
+              ) : (
+                <>
+                  <s.SpacerLarge />
+                  {blockchain.account === "" ||
+                    blockchain.smartContract === null ? (
+                    <s.Container
+                      ai={"center"}
+                      jc={"center"}
+                      style={{ height: "60%" }}
                     >
-                      CONNECT
-                    </StyledButton>
-                    {blockchain.errorMsg !== "" ? (
-                      <>
-                        <s.SpacerSmall />
-                        <s.TextDescription
-                          style={{
-                            textAlign: "center",
-                            color: "var(--accent-text)",
-                          }}
-                        >
-                          {blockchain.errorMsg}
-                        </s.TextDescription>
-                      </>
-                    ) : null}
-                  </s.Container>
-                ) : (
-                  <>
-                    <s.TextDescription
-                      style={{
-                        textAlign: "center",
-                        color: "var(--accent-text)",
-                      }}
-                    >
-                      {feedback}
-                    </s.TextDescription>
-                    <s.SpacerMedium />
-                    <s.Container ai={"center"} jc={"center"} fd={"row"} style={{ width: 216 }}>
                       <StyledButton
-                        disabled={claimingNft ? 1 : 0}
                         onClick={(e) => {
                           e.preventDefault();
-                          claimNFTs();
+                          dispatch(connect());
                           getData();
                         }}
                       >
-                        {claimingNft ? "BUSY" : "BUY"}
+                        CONNECT
                       </StyledButton>
+                      {blockchain.errorMsg !== "" ? (
+                        <>
+                          <s.SpacerSmall />
+                          <s.TextDescription
+                            style={{
+                              textAlign: "center",
+                              color: "var(--accent-text)",
+                            }}
+                          >
+                            {blockchain.errorMsg}
+                          </s.TextDescription>
+                        </>
+                      ) : null}
                     </s.Container>
-                  </>
-                )}
-              </>
-            )}
+                  ) : (
+                    <>
+                      <s.TextDescription
+                        style={{
+                          textAlign: "center",
+                          color: "var(--accent-text)",
+                        }}
+                      >
+                        {feedback}
+                      </s.TextDescription>
+                      <s.SpacerMedium />
+                      <s.Container ai={"center"} jc={"center"} fd={"row"}>
+                        <StyledButton
+                          disabled={claimingNft ? 1 : 0}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            claimNFTs();
+                            getData();
+                          }}
+                        >
+                          {claimingNft ? "BUSY" : "BUY"}
+                        </StyledButton>
+                      </s.Container>
+                    </>
+                  )}
+                </>
+              )}
+            </div>
           </s.Container>
           <s.SpacerLarge />
-          <StyledPreview alt={"logo"} src={"/config/images/preview.png"} />
+          <s.Container
+            jc={"center"}
+            ai={"center"}
+            style={{
+              backgroundColor: "var(--accent)",
+              borderRadius: 24,
+              padding: 24,
+            }}
+          >
+            <div style={{ height: "204px", width: "204px" }}>
+              <s.TextTitle
+                style={{
+                  textAlign: "left",
+                  fontSize: 18,
+                  color: "var(--djng-light)",
+                }}
+              >
+                Minted NFTs
+              </s.TextTitle>
+
+              {data.imageURIs.length > 0 ?
+                <>
+                  {data.imageURIs.map((url) => {
+                    return (
+                      <img src={url}
+                        width="32"
+                        height="32"
+                        style={{
+                          marginRight: "8px",
+                          marginTop: "8px",
+                          borderRadius: 8,
+                          border: "1px solid var(--djng-dark)"
+                        }} />
+                    )
+                  })}
+                  <s.TextTitle
+                    style={{
+                      textAlign: "left",
+                      fontSize: 12,
+                      color: "var(--mtrx-light)",
+                      marginTop: 8
+                    }}
+                  >
+                    Left: {data.maxSupply - data.totalSupply}
+                  </s.TextTitle>
+                </>
+                :
+                <>
+                  <s.Container
+                    jc={"center"}
+                    ai={"center"}
+                    style={{
+                      height: "90%"
+                    }}
+                  >
+                    <img src={"/config/images/lock.svg"} />
+                  </s.Container>
+                </>
+              }
+            </div>
+          </s.Container>
         </ResponsiveWrapper>
+        <s.SpacerSmall />
         <StyledLink
           href={CONFIG.LIGHTPAPER}
           style={{
@@ -349,9 +413,9 @@ function App() {
             color: "var(--primary-text)",
           }}
           download
-          >
-            Lightpaper
-          </StyledLink>
+        >
+          Lightpaper
+        </StyledLink>
         <s.SpacerLarge />
         <s.SpacerLarge />
         <s.TextDescription
