@@ -381,9 +381,11 @@ function App() {
                   >
                     Left: {data.maxSupply - data.totalSupply}
                   </s.TextTitle>
-                  {data.imageURIs.map((url) => {
+                  {data.imageURIs.map(function (url, i) {
                     return (
-                      <img src={url}
+                      <img
+                        key={i}
+                        src={url}
                         width="32"
                         height="32"
                         style={{

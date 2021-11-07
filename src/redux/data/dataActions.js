@@ -41,12 +41,12 @@ export const fetchData = () => {
           .blockchain.smartContract.methods.tokenURI(`${i}`)
           .call();
 
-        let trimmedTonekURI = tokenURI.replace("://", "/");
-        let res = await fetch('https://millionlion.mypinata.cloud/' + trimmedTonekURI);
+        let trimmedTokenURI = tokenURI.replace("://", "/");
+        let res = await fetch('https://millionlion.mypinata.cloud/' + trimmedTokenURI);
         let metadata = await res.json();
         let trimmedImagedURI = metadata.image.replace("://", "/");
 
-        imageURIs.push('https://millionlion.mypinata.cloud/' + trimmedImagedURI);
+        imageURIs[i] = 'https://millionlion.mypinata.cloud/' + trimmedImagedURI;
       }
 
       dispatch(
