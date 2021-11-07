@@ -352,7 +352,12 @@ function App() {
               padding: 24,
             }}
           >
-            <div style={{ height: "204px", width: "204px" }}>
+            <div
+              style={{
+                overflow: "auto",
+                height: "204px",
+                width: "204px"
+              }}>
               <s.TextTitle
                 style={{
                   textAlign: "left",
@@ -365,6 +370,17 @@ function App() {
 
               {data.imageURIs.length > 0 ?
                 <>
+
+                  <s.TextTitle
+                    style={{
+                      textAlign: "left",
+                      fontSize: 12,
+                      color: "var(--mtrx-light)",
+                      marginBottom: 8
+                    }}
+                  >
+                    Left: {data.maxSupply - data.totalSupply}
+                  </s.TextTitle>
                   {data.imageURIs.map((url) => {
                     return (
                       <img src={url}
@@ -378,16 +394,6 @@ function App() {
                         }} />
                     )
                   })}
-                  <s.TextTitle
-                    style={{
-                      textAlign: "left",
-                      fontSize: 12,
-                      color: "var(--mtrx-light)",
-                      marginTop: 8
-                    }}
-                  >
-                    Left: {data.maxSupply - data.totalSupply}
-                  </s.TextTitle>
                 </>
                 :
                 <>
