@@ -354,6 +354,7 @@ function App() {
           >
             <div
               style={{
+                borderRadius: "8px",
                 overflow: "auto",
                 height: "204px",
                 width: "204px"
