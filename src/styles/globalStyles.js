@@ -74,3 +74,8 @@ export const StyledClickable = styled.div`
     opacity: 0.6;
   }
 `;
+
+export const StyledLink = styled.a`
+  color: var(--secondary);
+  text-decoration: none;
+`;
