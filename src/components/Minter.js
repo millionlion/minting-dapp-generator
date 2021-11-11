@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { connect } from "./../redux/blockchain/blockchainActions";
-import { useDispatch, useSelector } from "react-redux";
+import { useWallet } from "./../contexts/WalletContext";
 import { useContract } from "../contexts/ContractContext";
 import styled from "styled-components";
 import * as s from "./../styles/globalStyles";
@@ -26,45 +25,8 @@ export const StyledButton = styled.button`
 `;
 
 const Minter = ({ CONFIG }) => {
-  const dispatch = useDispatch();
   const { totalSupply } = useContract();
-  const blockchain = useSelector((state) => state.blockchain);
-  const [claimingNft, setClaimingNft] = useState(false);
-  const [feedback, setFeedback] = useState(`Click buy to mint your NFT.`);
-  const [mintAmount, setMintAmount] = useState(1);
-
-  const claimNFTs = () => {
-    let cost = CONFIG.WEI_COST;
-    let gasLimit = CONFIG.GAS_LIMIT;
-    let totalCostWei = String(cost * mintAmount);
-    let totalGasLimit = String(gasLimit * mintAmount);
-    console.log("Cost: ", totalCostWei);
-    console.log("Gas limit: ", totalGasLimit);
-    setFeedback(`Minting your ${CONFIG.NFT_NAME}...`);
-    setClaimingNft(true);
-    blockchain.smartContract.methods
-      .mint(mintAmount)
-      .send({
-        gasLimit: String(totalGasLimit),
-        to: CONFIG.CONTRACT_ADDRESS,
-        from: blockchain.account,
-        value: totalCostWei,
-      })
-      .once("error", (err) => {
-        console.log(err);
-        setFeedback("Sorry, something went wrong please try again later.");
-        setClaimingNft(false);
-      })
-      .then((receipt) => {
-        console.log(receipt);
-        setFeedback(
-          `The ${CONFIG.NFT_NAME} is yours! go visit Opensea.io to view it.`
-        );
-        setClaimingNft(false);
-        
-        // TODO: refresh data
-      });
-  };
+  const { account, message, errorMessage, isMinting, connect, mint } = useWallet();
 
   return (
     <s.Container
@@ -98,8 +60,7 @@ const Minter = ({ CONFIG }) => {
         ) : (
           <>
             <s.SpacerLarge />
-            {blockchain.account === "" ||
-              blockchain.smartContract === null ? (
+            {account === "" ? (
               <s.Container
                 ai={"center"}
                 jc={"center"}
@@ -108,14 +69,15 @@ const Minter = ({ CONFIG }) => {
                 <StyledButton
                   onClick={(e) => {
                     e.preventDefault();
-                    dispatch(connect());
+                    connect();
 
                     // TODO: refresh data
                   }}
                 >
                   CONNECT
+                  {account}
                 </StyledButton>
-                {blockchain.errorMsg !== "" ? (
+                {errorMessage !== "" ? (
                   <>
                     <s.SpacerSmall />
                     <s.TextDescription
@@ -124,7 +86,7 @@ const Minter = ({ CONFIG }) => {
                         color: "var(--accent-text)",
                       }}
                     >
-                      {blockchain.errorMsg}
+                      {errorMessage}
                     </s.TextDescription>
                   </>
                 ) : null}
@@ -137,20 +99,20 @@ const Minter = ({ CONFIG }) => {
                     color: "var(--accent-text)",
                   }}
                 >
-                  {feedback}
+                  {message}
                 </s.TextDescription>
                 <s.SpacerMedium />
                 <s.Container ai={"center"} jc={"center"} fd={"row"}>
                   <StyledButton
-                    disabled={claimingNft ? 1 : 0}
+                    disabled={isMinting ? 1 : 0}
                     onClick={(e) => {
                       e.preventDefault();
-                      claimNFTs();
+                      mint();
 
                       // TODO: refresh data
                     }}
                   >
-                    {claimingNft ? "BUSY" : "BUY"}
+                    {isMinting ? "BUSY" : "BUY"}
                   </StyledButton>
                 </s.Container>
               </>
