@@ -1,9 +1,9 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useContract } from "../contexts/ContractContext";
 import * as s from "./../styles/globalStyles";
 
 const Minted = () => {
-  const data = useSelector((state) => state.data);
+  const { totalSupply, maxSupply, imageURIs } = useContract();
 
   return (
     <s.Container
@@ -32,7 +32,7 @@ const Minted = () => {
           Minted NFTs
         </s.TextTitle>
 
-        {data.imageURIs.length > 0 ?
+        {imageURIs.length > 0 ?
           <>
             <s.TextTitle
               style={{
@@ -42,9 +42,9 @@ const Minted = () => {
                 marginBottom: 8
               }}
             >
-              Left: {data.maxSupply - data.totalSupply}
+              Left: {maxSupply - totalSupply}
             </s.TextTitle>
-            {data.imageURIs.map(function (url, i) {
+            {imageURIs.map(function (url, i) {
               return (
                 <img
                   key={i}
@@ -69,7 +69,7 @@ const Minted = () => {
                 height: "90%"
               }}
             >
-              <img src={"/config/images/lock.svg"} />
+              <img src={"/config/animations/spinner.svg"} />
             </s.Container>
           </>
         }

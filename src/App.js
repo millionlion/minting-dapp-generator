@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useContract } from "./contexts/ContractContext";
 import Guide from "./components/Guide";
 import Minter from "./components/Minter";
 import Minted from "./components/Minted";
@@ -37,7 +37,7 @@ export const StyledHeader = styled.img`
 `;
 
 function App() {
-  const data = useSelector((state) => state.data);
+  const { totalSupply } = useContract();
   const [CONFIG, SET_CONFIG] = useState({
     CONTRACT_ADDRESS: "",
     SCAN_LINK: "",
@@ -89,7 +89,7 @@ function App() {
               color: "var(--accent-text)",
             }}
           >
-            {data.totalSupply} / {CONFIG.MAX_SUPPLY}
+            {totalSupply} / {CONFIG.MAX_SUPPLY}
           </s.TextTitle>
           <StyledHeader alt={"header"} src={"/config/images/header.svg"} />
         </s.Container>

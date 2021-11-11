@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { connect } from "./../redux/blockchain/blockchainActions";
-import { fetchData } from "./../redux/data/dataActions";
 import { useDispatch, useSelector } from "react-redux";
+import { useContract } from "../contexts/ContractContext";
 import styled from "styled-components";
 import * as s from "./../styles/globalStyles";
 
@@ -27,21 +27,11 @@ export const StyledButton = styled.button`
 
 const Minter = ({ CONFIG }) => {
   const dispatch = useDispatch();
+  const { totalSupply } = useContract();
   const blockchain = useSelector((state) => state.blockchain);
-  const data = useSelector((state) => state.data);
   const [claimingNft, setClaimingNft] = useState(false);
   const [feedback, setFeedback] = useState(`Click buy to mint your NFT.`);
   const [mintAmount, setMintAmount] = useState(1);
-
-  useEffect(() => {
-    getData();
-  }, [blockchain.account]);
-
-  const getData = () => {
-    if (blockchain.account !== "" && blockchain.smartContract !== null) {
-      dispatch(fetchData(blockchain.account));
-    }
-  };
 
   const claimNFTs = () => {
     let cost = CONFIG.WEI_COST;
@@ -71,7 +61,8 @@ const Minter = ({ CONFIG }) => {
           `The ${CONFIG.NFT_NAME} is yours! go visit Opensea.io to view it.`
         );
         setClaimingNft(false);
-        dispatch(fetchData(blockchain.account));
+        
+        // TODO: refresh data
       });
   };
 
@@ -87,7 +78,7 @@ const Minter = ({ CONFIG }) => {
     >
       <div style={{ height: "204px", width: "204px", textAlign: "center" }}>
         <img src={"/config/images/price.svg"} />
-        {Number(data.totalSupply) >= CONFIG.MAX_SUPPLY ? (
+        {Number(totalSupply) >= CONFIG.MAX_SUPPLY ? (
           <>
             <s.TextTitle
               style={{ textAlign: "center", color: "var(--accent-text)" }}
@@ -118,7 +109,8 @@ const Minter = ({ CONFIG }) => {
                   onClick={(e) => {
                     e.preventDefault();
                     dispatch(connect());
-                    getData();
+
+                    // TODO: refresh data
                   }}
                 >
                   CONNECT
@@ -154,7 +146,8 @@ const Minter = ({ CONFIG }) => {
                     onClick={(e) => {
                       e.preventDefault();
                       claimNFTs();
-                      getData();
+
+                      // TODO: refresh data
                     }}
                   >
                     {claimingNft ? "BUSY" : "BUY"}

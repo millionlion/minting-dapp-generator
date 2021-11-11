@@ -16,5 +16,6 @@
   "MARKETPLACE": "Opeansea",
   "MARKETPLACE_LINK": "https://opensea.io/collection/millionlion",
   "SHOW_BACKGROUND": true,
-  "IPFS_GATEWAY": "https://millionlion.mypinata.cloud/"
+  "IPFS_GATEWAY": "https://millionlion.mypinata.cloud/",
+  "NETWORK_PROVIDER": "https://polygon-mainnet.g.alchemy.com/v2/UzPhat9XWDUTs5AdCqIWrzFkQT2AxiWJ"
 }
