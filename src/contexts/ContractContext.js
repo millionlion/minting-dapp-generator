@@ -47,7 +47,7 @@ export function ContractProvider({ children }) {
     const getImageURIs = async (smartContract, totalSupply) => {
         let imageURIs = []
 
-        for (let i = 1; i <= totalSupply; i++) {
+        for (let i = totalSupply; i >= (totalSupply - 2); i--) {
             let tokenURI = await smartContract
                 .methods
                 .tokenURI(`${i}`)

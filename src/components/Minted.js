@@ -18,9 +18,9 @@ const Minted = () => {
       <div
         style={{
           borderRadius: "8px",
-          overflow: "auto",
           height: "204px",
-          width: "204px"
+          width: "204px",
+          position: "relative"
         }}>
         <s.TextTitle
           style={{
@@ -34,31 +34,55 @@ const Minted = () => {
 
         {imageURIs.length > 0 ?
           <>
+            <s.Container
+              fd={"row"}
+              style={{
+                overflow: "auto"
+              }}
+            >
+              {imageURIs.map(function (url, i) {
+                return (
+                  <img
+                    key={i}
+                    src={url}
+                    width="128"
+                    height="128"
+                    style={{
+                      marginRight: "8px",
+                      marginTop: "12px",
+                      borderRadius: 8,
+                      border: "1px solid var(--djng-dark)"
+                    }} />
+                )
+              })}
+
+              <img
+                key={"osb"}
+                src={"/config/images/opensea-banner.svg"}
+                style={{
+                  marginTop: "12px",
+                  borderRadius: 8,
+                  border: "1px solid var(--djng-dark)",
+                  cursor: "pointer"
+                }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  window.location.href = "https://opensea.io/collection/millionlion"
+                }}
+              />
+            </s.Container>
+
             <s.TextTitle
               style={{
                 textAlign: "left",
                 fontSize: 12,
                 color: "var(--mtrx-light)",
-                marginBottom: 8
+                bottom: "0",
+                position: "absolute"
               }}
             >
               Left: {maxSupply - totalSupply}
             </s.TextTitle>
-            {imageURIs.map(function (url, i) {
-              return (
-                <img
-                  key={i}
-                  src={url}
-                  width="32"
-                  height="32"
-                  style={{
-                    marginRight: "8px",
-                    marginTop: "8px",
-                    borderRadius: 8,
-                    border: "1px solid var(--djng-dark)"
-                  }} />
-              )
-            })}
           </>
           :
           <>
