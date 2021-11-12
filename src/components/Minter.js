@@ -38,7 +38,12 @@ const Minter = ({ CONFIG }) => {
         borderRadius: 24,
       }}
     >
-      <div style={{ height: "204px", width: "204px", textAlign: "center" }}>
+      <div style={{
+        height: "204px",
+        width: "204px",
+        textAlign: "center",
+        position: "relative"
+      }}>
         <img src={"/config/images/price.svg"} />
         {Number(totalSupply) >= CONFIG.MAX_SUPPLY ? (
           <>
@@ -59,39 +64,52 @@ const Minter = ({ CONFIG }) => {
           </>
         ) : (
           <>
-            <s.SpacerLarge />
-            {account === "" ? (
-              <s.Container
-                ai={"center"}
-                jc={"center"}
-                style={{ height: "60%" }}
-              >
-                <StyledButton
-                  onClick={(e) => {
-                    e.preventDefault();
-                    connect();
+            <s.SpacerSmall />
+            {account === "" ?
+              <>
+                <s.Container
+                  ai={"center"}
+                  jc={"center"}
+                  style={{ height: "60%" }}
+                >
+                  <StyledButton
+                    onClick={(e) => {
+                      e.preventDefault();
+                      connect();
 
-                    // TODO: refresh data
+                      // TODO: refresh data
+                    }}
+                  >
+                    CONNECT
+                    {account}
+                  </StyledButton>
+                  {errorMessage !== "" ? (
+                    <>
+                      <s.SpacerSmall />
+                      <s.TextDescription
+                        style={{
+                          textAlign: "center",
+                          color: "var(--accent-text)",
+                        }}
+                      >
+                        {errorMessage}
+                      </s.TextDescription>
+                    </>
+                  ) : null}
+                </s.Container>
+                <s.TextTitle
+                  style={{
+                    textAlign: "left",
+                    fontSize: 12,
+                    color: "var(--djng-dark)",
+                    bottom: "0",
+                    position: "absolute"
                   }}
                 >
-                  CONNECT
-                  {account}
-                </StyledButton>
-                {errorMessage !== "" ? (
-                  <>
-                    <s.SpacerSmall />
-                    <s.TextDescription
-                      style={{
-                        textAlign: "center",
-                        color: "var(--accent-text)",
-                      }}
-                    >
-                      {errorMessage}
-                    </s.TextDescription>
-                  </>
-                ) : null}
-              </s.Container>
-            ) : (
+                  Connect to wallet
+                </s.TextTitle>
+              </>
+              :
               <>
                 <s.TextDescription
                   style={{
@@ -115,8 +133,23 @@ const Minter = ({ CONFIG }) => {
                     {isMinting ? "BUSY" : "BUY"}
                   </StyledButton>
                 </s.Container>
+                <s.TextTitle
+                  style={{
+                    textAlign: "left",
+                    fontSize: 12,
+                    color: "var(--mtrx-dark)",
+                    bottom: "0",
+                    position: "absolute",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    whiteSpace: "nowrap",
+                    width: "100%"
+                  }}
+                >
+                  Wallet: {account}
+                </s.TextTitle>
               </>
-            )}
+            }
           </>
         )}
       </div>

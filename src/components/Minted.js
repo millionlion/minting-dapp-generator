@@ -76,7 +76,7 @@ const Minted = () => {
               style={{
                 textAlign: "left",
                 fontSize: 12,
-                color: "var(--mtrx-light)",
+                color: "var(--mtrx-dark)",
                 bottom: "0",
                 position: "absolute"
               }}
