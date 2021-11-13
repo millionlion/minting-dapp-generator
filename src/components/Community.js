@@ -60,7 +60,8 @@ const Community = () => {
                   imageSize={"48px"}
                   imageStyle={{
                     position: "relative",
-                    left: "4px"
+                    left: "4px",
+                    bottom: "2px"
                   }}
                   imageSource={"/config/images/polygon-logo.svg"}
                   text={walletBalance}
