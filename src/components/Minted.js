@@ -1,36 +1,17 @@
 import React from "react";
 import { useContract } from "../contexts/ContractContext";
+import Label from "./shared/Label";
 import * as s from "./../styles/globalStyles";
 
 const Minted = () => {
   const { totalSupply, maxSupply, imageURIs } = useContract();
 
   return (
-    <s.Container
-      jc={"center"}
-      ai={"center"}
-      style={{
-        backgroundColor: "var(--accent)",
-        borderRadius: 24,
-        padding: 24,
-      }}
-    >
-      <div
-        style={{
-          borderRadius: "8px",
-          height: "204px",
-          width: "204px",
-          position: "relative"
-        }}>
-        <s.TextTitle
-          style={{
-            textAlign: "left",
-            fontSize: 18,
-            color: "var(--djng-light)",
-          }}
-        >
+    <s.Section>
+      <s.Wrapper>
+        <s.SectionTitle>
           Minted NFTs
-        </s.TextTitle>
+        </s.SectionTitle>
 
         {imageURIs.length > 0 ?
           <>
@@ -76,12 +57,23 @@ const Minted = () => {
               style={{
                 textAlign: "left",
                 fontSize: 12,
-                color: "var(--mtrx-dark)",
-                bottom: "0",
+                color: "var(--djng)",
+                bottom: "-16px",
                 position: "absolute"
               }}
             >
-              Left: {maxSupply - totalSupply}
+              <Label
+                textSize={12}
+                hasAction={false}
+                imageSize={"16px"}
+                imageStyle={{
+                  position: "relative",
+                  marginRight: "4px",
+                  marginBottom: "4px"
+                }}
+                imageSource={"/config/images/hashtag-svgrepo-com.svg"}
+                text={`${maxSupply - totalSupply} (remaining)`}
+              />
             </s.TextTitle>
           </>
           :
@@ -97,8 +89,8 @@ const Minted = () => {
             </s.Container>
           </>
         }
-      </div>
-    </s.Container>
+      </s.Wrapper>
+    </s.Section>
   )
 }
 

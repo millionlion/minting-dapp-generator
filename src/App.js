@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useContract } from "./contexts/ContractContext";
-import Guide from "./components/Guide";
+import Community from "./components/Community";
 import Minter from "./components/Minter";
 import Minted from "./components/Minted";
 import styled from "styled-components";
@@ -118,7 +118,7 @@ function App() {
         </s.TextTitle>
         <s.SpacerSmall />
         <ResponsiveWrapper>
-          <Guide />
+          <Community />
           <s.SpacerLarge />
           <Minter CONFIG={CONFIG} />
           <s.SpacerLarge />

@@ -50,12 +50,29 @@ export const Container = styled.div`
   background-position: center;
 `;
 
+export const Section = styled(Container)`
+  justify-content: center:
+  align-items: center;
+  background-color: var(--accent);
+  border-radius: 24px;
+  padding: 24px;
+`;
+
 export const TextTitle = styled.p`
   color: var(--primary-text);
   font-size: 18px;
   font-weight: 500;
   line-height: 1.6;
 `;
+
+export const SectionTitle = styled(TextTitle)`
+  text-align: left;
+  font-size: 18;
+  color: var(--djng-light);
+  margin-top: -12px;
+  margin-bottom: 8px;
+`;
+
 
 export const TextSubTitle = styled.p`
   color: var(--primary-text);
@@ -78,4 +95,26 @@ export const StyledClickable = styled.div`
 export const StyledLink = styled.a`
   color: var(--secondary);
   text-decoration: none;
+`;
+
+export const Wrapper = styled.div`
+  height: 204px;
+  width: 204px;
+  position: relative;
+`;
+
+export const InnerWrapper = styled.div`
+  overflow: auto;
+  box-shadow: inset 0px 0px 8px 5px rgba(0,0,0,0.2);
+  border-radius: 16px;
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-top: 12px;
+`;
+
+export const SectionFooter = styled.div`
+  font-size: 12px;
+  color: var(--djng);
+  bottom: -16px;
+  position: absolute;
 `;

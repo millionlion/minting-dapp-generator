@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { useWallet } from "./../contexts/WalletContext";
 import { useContract } from "../contexts/ContractContext";
+import Label from "./shared/Label";
 import styled from "styled-components";
 import * as s from "./../styles/globalStyles";
 
@@ -29,40 +30,18 @@ const Minter = ({ CONFIG }) => {
   const { account, message, errorMessage, isMinting, connect, mint } = useWallet();
 
   return (
-    <s.Container
-      jc={"center"}
-      ai={"center"}
-      style={{
-        backgroundColor: "var(--accent)",
-        padding: 24,
-        borderRadius: 24,
-      }}
-    >
-      <div style={{
-        height: "204px",
-        width: "204px",
-        textAlign: "center",
-        position: "relative"
-      }}>
-        <img src={"/config/images/price.svg"} />
-        {Number(totalSupply) >= CONFIG.MAX_SUPPLY ? (
-          <>
-            <s.TextTitle
-              style={{ textAlign: "center", color: "var(--accent-text)" }}
-            >
-              The sale has ended.
-            </s.TextTitle>
-            <s.TextDescription
-              style={{ textAlign: "center", color: "var(--accent-text)" }}
-            >
-              You can still find {CONFIG.NFT_NAME} on
-            </s.TextDescription>
-            <s.SpacerSmall />
-            <s.StyledLink target={"_blank"} href={CONFIG.MARKETPLACE_LINK}>
-              {CONFIG.MARKETPLACE}
-            </s.StyledLink>
-          </>
-        ) : (
+    <s.Section>
+      <s.Wrapper style={{ textAlign: "center" }}>
+        <img
+          src={"/config/images/price.svg"}
+          style={{
+            marginTop: "-12px",
+            marginBottom: "8px"
+          }}
+        />
+        {Number(totalSupply) >= CONFIG.MAX_SUPPLY ?
+          <SoldOut config={CONFIG} />
+          :
           <>
             <s.SpacerSmall />
             {account === "" ?
@@ -81,7 +60,6 @@ const Minter = ({ CONFIG }) => {
                     }}
                   >
                     CONNECT
-                    {account}
                   </StyledButton>
                   {errorMessage !== "" ? (
                     <>
@@ -101,12 +79,30 @@ const Minter = ({ CONFIG }) => {
                   style={{
                     textAlign: "left",
                     fontSize: 12,
-                    color: "var(--djng-dark)",
-                    bottom: "0",
+                    color: "var(--djng)",
+                    bottom: "-16px",
                     position: "absolute"
                   }}
                 >
-                  Connect to wallet
+                  <span
+                    style={{
+                      display: 'flex',
+                      fontSize: 12,
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <img src={"/config/images/lock-svgrepo-com.svg"}
+                      height="16px"
+                      width="16px"
+                      style={{
+                        position: "relative",
+                        marginRight: "4px",
+                        marginBottom: "4px"
+                      }}
+                    />
+                    No connection
+                  </span>
                 </s.TextTitle>
               </>
               :
@@ -137,8 +133,8 @@ const Minter = ({ CONFIG }) => {
                   style={{
                     textAlign: "left",
                     fontSize: 12,
-                    color: "var(--mtrx-dark)",
-                    bottom: "0",
+                    color: "var(--djng)",
+                    bottom: "-16px",
                     position: "absolute",
                     overflow: "hidden",
                     textOverflow: "ellipsis",
@@ -146,14 +142,47 @@ const Minter = ({ CONFIG }) => {
                     width: "100%"
                   }}
                 >
-                  Wallet: {account}
+                  <Label
+                    textSize={12}
+                    hasAction={false}
+                    imageSize={"16px"}
+                    imageStyle={{
+                      position: "relative",
+                      marginRight: "4px",
+                      marginBottom: "4px"
+                    }}
+                    imageSource={"/config/images/unlock-svgrepo-com.svg"}
+                    text={`Wallet: ${account.slice(0, 8)}...`}
+                  />
                 </s.TextTitle>
               </>
             }
           </>
-        )}
-      </div>
-    </s.Container>
+        }
+      </s.Wrapper>
+    </s.Section>
+  )
+}
+
+const SoldOut = ({ config }) => {
+
+  return (
+    <>
+      <s.TextTitle
+        style={{ textAlign: "center", color: "var(--accent-text)" }}
+      >
+        The sale has ended.
+      </s.TextTitle>
+      <s.TextDescription
+        style={{ textAlign: "center", color: "var(--accent-text)" }}
+      >
+        You can still find {config.NFT_NAME} on
+      </s.TextDescription>
+      <s.SpacerSmall />
+      <s.StyledLink target={"_blank"} href={config.MARKETPLACE_LINK}>
+        {config.MARKETPLACE}
+      </s.StyledLink>
+    </>
   )
 }
 
